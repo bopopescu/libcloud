@@ -213,6 +213,9 @@ class GCENodeDriverTest(GoogleTestCase, TestCaseMixin):
         actual = self.driver._build_service_account_gce_struct(input)
         self.assertTrue('email' in actual)
         self.assertTrue('scopes' in actual)
+        input = {'scopes': ['compute-ro'], 'email': 'test@example.com'}
+        actual = self.driver._build_service_account_gce_struct(input)
+        self.assertEqual(actual['email'], 'test@example.com')
 
     def test_build_service_account_gce_list(self):
         # ensure we have a list
